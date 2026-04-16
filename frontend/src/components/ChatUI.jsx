@@ -82,9 +82,9 @@ export default function ChatUI({ sessionId }) {
   };
 
   return (
-    <div className="flex h-[70vh] flex-col overflow-hidden rounded-2xl border border-slate-700 bg-panel/70 shadow-2xl backdrop-blur">
-      <div className="border-b border-slate-700 px-4 py-3">
-        <h2 className="text-lg font-semibold text-white">AI Healthcare Support Chat</h2>
+    <div className="flex h-[70vh] flex-col overflow-hidden rounded-3xl border border-sky-300/25 bg-gradient-to-b from-slate-900/80 via-blue-950/80 to-indigo-950/75 shadow-[0_18px_45px_rgba(8,47,73,0.45)] backdrop-blur-xl">
+      <div className="border-b border-sky-200/15 bg-slate-900/40 px-4 py-3">
+        <h2 className="text-lg font-semibold tracking-tight text-cyan-50">AI Healthcare Support Chat</h2>
       </div>
 
       <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
@@ -93,21 +93,21 @@ export default function ChatUI({ sessionId }) {
             <div
               className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                 msg.role === "user"
-                  ? "bg-accent text-slate-950"
-                  : "bg-slate-800 text-slate-100"
+                  ? "bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-400 text-slate-950 shadow-[0_8px_22px_rgba(56,189,248,0.35)]"
+                  : "border border-sky-100/10 bg-slate-800/85 text-slate-100 shadow-[0_8px_22px_rgba(2,6,23,0.4)]"
               }`}
             >
               {msg.text}
             </div>
             {msg.meta && (
-              <div className="mt-2 rounded-xl border border-slate-700 bg-slate-900/70 p-3 text-xs text-slate-300">
+              <div className="mt-2 rounded-xl border border-sky-300/20 bg-slate-950/45 p-3 text-xs text-slate-200">
                 <p>
-                  Intent: <span className="text-white">{msg.meta.intent}</span> | Urgency:{" "}
-                  <span className="text-white">{msg.meta.urgency}</span> | Emotion:{" "}
-                  <span className="text-white">{msg.meta.emotion}</span>
+                  Intent: <span className="text-cyan-200">{msg.meta.intent}</span> | Urgency:{" "}
+                  <span className="text-cyan-200">{msg.meta.urgency}</span> | Emotion:{" "}
+                  <span className="text-cyan-200">{msg.meta.emotion}</span>
                 </p>
                 <p>
-                  Confidence: <span className="text-white">{msg.meta.confidence}%</span> |
+                  Confidence: <span className="text-cyan-200">{msg.meta.confidence}%</span> |
                   Resolved:{" "}
                   <span className={msg.meta.resolved ? "text-success" : "text-warning"}>
                     {String(msg.meta.resolved)}
@@ -115,13 +115,13 @@ export default function ChatUI({ sessionId }) {
                 </p>
                 {msg.meta.patientName && (
                   <p>
-                    Patient: <span className="text-white">{msg.meta.patientName}</span>
+                    Patient: <span className="text-cyan-200">{msg.meta.patientName}</span>
                   </p>
                 )}
                 {msg.meta.bookingStatus !== "none" && (
                   <p>
                     Booking:{" "}
-                    <span className="text-white">
+                    <span className="text-cyan-200">
                       {msg.meta.bookingStatus}
                       {msg.meta.bookingId ? ` (${msg.meta.bookingId})` : ""}
                     </span>
@@ -132,7 +132,7 @@ export default function ChatUI({ sessionId }) {
                 )}
                 <p className="mt-1">
                   Sources:{" "}
-                  <span className="text-slate-200">
+                  <span className="text-slate-100">
                     {msg.meta.sources.length ? msg.meta.sources.join(", ") : "None"}
                   </span>
                 </p>
@@ -141,24 +141,24 @@ export default function ChatUI({ sessionId }) {
           </div>
         ))}
         {loading && (
-          <div className="max-w-[80%] rounded-2xl bg-slate-800 px-4 py-3 text-sm text-slate-300">
+          <div className="max-w-[80%] rounded-2xl border border-sky-100/10 bg-slate-800/80 px-4 py-3 text-sm text-slate-200">
             Thinking...
           </div>
         )}
       </div>
 
-      <form onSubmit={onSend} className="border-t border-slate-700 p-3">
+      <form onSubmit={onSend} className="border-t border-sky-100/15 bg-slate-950/35 p-3">
         <div className="flex gap-2">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Try: 'My name is Rahul' or 'Book 10:15 AM slot for shoulder pain'"
-            className="flex-1 rounded-xl border border-slate-600 bg-slate-900 px-3 py-2 text-slate-100 outline-none placeholder:text-slate-500 focus:border-accent"
+            className="flex-1 rounded-xl border border-sky-300/30 bg-slate-900/80 px-3 py-2 text-slate-100 outline-none placeholder:text-slate-400 focus:border-cyan-300 focus:ring-2 focus:ring-cyan-400/30"
           />
           <button
             type="submit"
             disabled={loading}
-            className="rounded-xl bg-accent px-4 py-2 font-medium text-slate-950 transition hover:brightness-110 disabled:opacity-50"
+            className="rounded-xl bg-gradient-to-r from-cyan-300 to-sky-400 px-5 py-2 font-semibold text-slate-950 shadow-[0_8px_22px_rgba(56,189,248,0.35)] transition hover:brightness-110 disabled:opacity-50"
           >
             Send
           </button>
@@ -175,7 +175,7 @@ export default function ChatUI({ sessionId }) {
               setMessages(reset);
               sessionStorage.setItem(storageKey(sessionId), JSON.stringify(reset));
             }}
-            className="rounded-xl border border-slate-600 px-4 py-2 font-medium text-slate-200 transition hover:border-slate-400"
+            className="rounded-xl border border-cyan-300/30 bg-slate-900/60 px-4 py-2 font-medium text-cyan-100 transition hover:border-cyan-200 hover:bg-slate-900"
           >
             Clear
           </button>
